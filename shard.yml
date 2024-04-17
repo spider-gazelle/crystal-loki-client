@@ -1,0 +1,20 @@
+name: loki-client
+version: 0.1.0
+
+description: |
+  Unofficial Crystal client library for accessing Grafana Loki APIs.
+
+authors:
+  - Ali Naqvi <syed.alinaqvi@gmail.com>
+
+crystal: ">= 1.12.0"
+
+license: MIT
+
+dependencies:
+  connect-proxy:
+    github: spider-gazelle/connect-proxy
+
+development_dependencies:
+  ameba:
+    github: veelenga/ameba
