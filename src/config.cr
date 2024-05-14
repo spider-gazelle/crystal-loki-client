@@ -5,9 +5,10 @@ require "./consts"
 module Loki
   record ProxyConfig, username : String?, password : String?, url : String, skip_verify : Bool? do
     def self.from_env
-      url = ENV["https_proxy"]? || ENV["http_proxy"]? || ENV["HTTPS_PROXY"]? || ENV["HTTP_PROXY"]?
-
-      ProxyConfig.new(ENV["PROXY_USERNAME"]?, ENV["PROXY_PASSWORD"]?, url, ENV["PROXY_VERIFY_TLS"]?)
+      addr = ENV["https_proxy"]? || ENV["http_proxy"]? || ENV["HTTPS_PROXY"]? || ENV["HTTP_PROXY"]?
+      if url = addr
+        ProxyConfig.new(ENV["PROXY_USERNAME"]?, ENV["PROXY_PASSWORD"]?, url, ENV["PROXY_VERIFY_TLS"]?.try { |v| v.downcase == "true" })
+      end
     end
 
     def parse
